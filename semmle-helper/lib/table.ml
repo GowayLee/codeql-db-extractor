@@ -15,7 +15,7 @@ type attribute =
 type field_def =
   { name : string
   ; typ : field_type
-  ; attributes : attribute list
+  ; attribute : attribute
   }
 
 (* Def of table *)

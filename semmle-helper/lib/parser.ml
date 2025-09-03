@@ -38,7 +38,7 @@ let field =
        (match typ with
         | Int -> "int"
         | String -> "string"));
-  return { name; typ; attributes = [ attr ] }
+  return { name; typ; attribute = attr }
 ;;
 
 (* 解析一张表： 表名(字段1, 字段2, ...); *)

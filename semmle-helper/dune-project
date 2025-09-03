@@ -1,0 +1,26 @@
+(lang dune 3.20)
+
+(name semmle-helper)
+
+(generate_opam_files true)
+
+(source
+ (github gowaylee/codeql-db-extractor))
+
+(authors "Haoyuan Li <lihaoyuan0506@gmail.com>")
+
+(maintainers "Haoyuan Li <lihaoyuan0506@gmail.com>")
+
+(license GPL-3.0-only)
+
+(documentation https://github.com/gowaylee/codeql-db-extractor)
+
+(package
+ (name semmle-helper)
+ (synopsis "A short synopsis")
+ (description "A longer description")
+ (depends ocaml angstrom yojson)
+ (tags
+  ("CodeQL")))
+
+; See the complete stanza docs at https://dune.readthedocs.io/en/stable/reference/dune-project/index.html

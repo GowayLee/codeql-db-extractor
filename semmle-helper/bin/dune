@@ -1,0 +1,4 @@
+(executable
+ (public_name semmle-helper)
+ (name main)
+ (libraries semmle_helper))

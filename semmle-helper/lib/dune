@@ -1,0 +1,4 @@
+(library
+ (name semmle_helper)
+ (libraries angstrom yojson unix)
+ (modules table lexer parser logger))

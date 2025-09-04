@@ -6,7 +6,7 @@ open Angstrom
 let parse_input input =
   match parse_string ~consume:All file input with
   | Ok tables -> tables
-  | Error err -> failwith ("Parse error: " ^ err)
+  | Error err -> failwith ("Parse error" ^ err)
 ;;
 
 let print_tables tables =
@@ -17,11 +17,12 @@ let print_tables tables =
          (fun fld ->
             let attr_info =
               match fld.attribute with
-              | ForeignKey { ref_table; _ } -> Printf.sprintf " (FK: %s)" ref_table
+              | PrimaryKey cur_table -> Printf.sprintf " (PK: %s)" cur_table
+              | ForeignKey ref_table -> Printf.sprintf " (FK: %s)" ref_table
               | BasicRef typ ->
                 (match typ with
                  | Int -> "(Basic Reference of Int)"
-                 | String -> "(Basic Reference of Int)")
+                 | String -> "(Basic Reference of String)")
             in
             Printf.printf
               "  Field: %s : %s%s\n"

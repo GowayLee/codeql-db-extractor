@@ -4,11 +4,8 @@ type field_type =
   | String
 
 type attribute =
-  | ForeignKey of
-      { ref_table : string
-      ; ref_type : string
-      }
-    (* @table ref *)
+  | PrimaryKey of string
+  | ForeignKey of string
   | BasicRef of field_type (* int ref 或 string ref *)
 
 (* Field *)

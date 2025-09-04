@@ -1,4 +1,4 @@
 (library
  (name semmle_helper)
  (libraries angstrom yojson unix)
- (modules table lexer parser logger cli))
+ (modules table lexer parser logger cli json_serializer))

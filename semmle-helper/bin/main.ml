@@ -1,6 +1,8 @@
 open Semmle_helper.Table
 open Semmle_helper.Parser
 open Semmle_helper.Cli
+open Semmle_helper.Json_serializer
+open Semmle_helper.Logger
 open Angstrom
 
 let parse_input input =
@@ -49,9 +51,14 @@ let print_scheme = function
 let () =
   let input_source = parse_args () in
   match input_source with
-  | FileInput content ->
+  | FileInput (content, verbose_mode, json_output) ->
+    set_quiet (not verbose_mode);
     let scheme = parse_input content in
-    print_scheme scheme
+    (match json_output with
+     | Some output_file ->
+       write_scheme_to_file scheme output_file;
+       if verbose_mode then Printf.printf "JSON output written to: %s\n" output_file
+     | None -> print_scheme scheme)
   | UsageError ->
     print_usage ();
     exit 1

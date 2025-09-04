@@ -45,6 +45,6 @@ _opam/
 **/codeql-db/
 mt-scripts/
 
-# helper
-semmle-helper/examples/
-.agent-sync.toml
+# semmlecode-parser
+semmlecode-parser/examples/
+semmlecode-parser/.agent-sync.toml

@@ -2,6 +2,8 @@
 type field_type =
   | Int
   | String
+  | Float
+  | Boolean
 
 type table_name = string
 

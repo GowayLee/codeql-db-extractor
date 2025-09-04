@@ -2,16 +2,8 @@ open Angstrom
 open Lexer
 open Table
 
-(* 主键信息 *)
-let keyset = string "#keyset[" *> many_till any_char (char ']')
-
 (* 关联表 *)
 let association = char '@' *> identifier *> many_till any_char (char ';')
-
-(* 字段枚举值 *)
-let case =
-  string "case @" *> identifier *> char '.' *> identifier *> many_till any_char (char ';')
-;;
 
 (* 外键属性：@table ref *)
 let foreign_key_attr =
@@ -26,8 +18,10 @@ let primary_key_attr =
 
 (* 基本类型引用属性：int ref 或 string ref *)
 let basic_ref_attr =
-  kw_int *> skip_ws *> string "ref" *> skip_ws *> return (BasicRef Int)
-  <|> kw_string *> skip_ws *> string "ref" *> skip_ws *> return (BasicRef String)
+  kw_int *> string "ref" *> skip_ws *> return (BasicRef Int)
+  <|> kw_string *> string "ref" *> skip_ws *> return (BasicRef String)
+  <|> kw_float *> string "ref" *> skip_ws *> return (BasicRef Float)
+  <|> kw_boolean *> string "ref" *> skip_ws *> return (BasicRef Boolean)
 ;;
 
 let attribute =
@@ -40,7 +34,11 @@ let attribute =
 let field =
   Logger.info "Starting to parse field";
   option false (kw_unique *> return true)
-  >>= (fun _ -> kw_int *> return Int <|> kw_string *> return String)
+  >>= (fun _ ->
+  kw_int *> return Int
+  <|> kw_string *> return String
+  <|> kw_float *> return Float
+  <|> kw_boolean *> return Boolean)
   >>= fun typ ->
   skip_ws *> identifier
   >>= fun name ->
@@ -52,7 +50,9 @@ let field =
        name
        (match typ with
         | Int -> "int"
-        | String -> "string"));
+        | String -> "string"
+        | Float -> "float"
+        | Boolean -> "boolean"));
   return { name; typ; attribute = attr }
 ;;
 
@@ -79,7 +79,7 @@ let table =
   skip_ws *> lparen *> sep_by (char ',' <* skip_ws) field
   >>= fun fields ->
   Logger.info (Printf.sprintf "Parsed table %s with %d fields" name (List.length fields));
-  rparen *> semicolon *> return { name; fields }
+  rparen *> option false (semicolon *> return true) *> return { name; fields }
 ;;
 
 let table_element = table >>| fun t -> Table t

@@ -22,13 +22,17 @@ let print_scheme = function
                 | ForeignKey tbl -> Printf.sprintf "FK: %s" tbl
                 | BasicRef Int -> "Basic Reference of Int"
                 | BasicRef String -> "Basic Reference of String"
+                | BasicRef Float -> "Basic Reference of Float"
+                | BasicRef Boolean -> "Basic Reference of Boolean"
               in
               Printf.printf
                 "  Field: %s : %s(%s)\n"
                 field.name
                 (match field.typ with
                  | Int -> "int"
-                 | String -> "string")
+                 | String -> "string"
+                 | Float -> "float"
+                 | Boolean -> "boolean")
                 attr_str)
            table.fields;
          print_newline ())

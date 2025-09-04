@@ -1,8 +1,20 @@
 open Angstrom
 
-(* 注释 *)
+(* comment *)
 let block_comment = string "/*" *> many_till any_char (string "*/")
 let line_comment = string "//" *> take_while (fun c -> c <> '\n' && c <> '\r')
+
+(* identifier *)
+let is_identifier_char c =
+  match c with
+  | 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' -> true
+  | _ -> false
+;;
+
+let identifier =
+  take_while1 is_identifier_char
+  >>= fun first_char -> take_while is_identifier_char >>| fun rest -> first_char ^ rest
+;;
 
 let whitespace =
   take_while1 (function
@@ -16,12 +28,23 @@ let space =
     | _ -> false)
 ;;
 
+(* enum of fileds *)
+let case =
+  string "case @" *> identifier *> char '.' *> identifier *> many_till any_char (char ';')
+;;
+
+(* keyset *)
+let keyset = string "#keyset[" *> many_till any_char (char ']')
+
+(* skip *)
 let skip_ws =
   skip_many
     (choice
        [ map line_comment ~f:(fun _ -> ())
        ; map block_comment ~f:(fun _ -> ())
        ; map whitespace ~f:(fun _ -> ())
+       ; map case ~f:(fun _ -> ())
+       ; map keyset ~f:(fun _ -> ())
        ])
 ;;
 
@@ -31,23 +54,16 @@ let skip_spaces_only =
        [ map line_comment ~f:(fun _ -> ())
        ; map block_comment ~f:(fun _ -> ())
        ; map space ~f:(fun _ -> ())
+       ; map case ~f:(fun _ -> ())
+       ; map keyset ~f:(fun _ -> ())
        ])
-;;
-
-let is_identifier_char c =
-  match c with
-  | 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' -> true
-  | _ -> false
-;;
-
-let identifier =
-  take_while1 is_identifier_char
-  >>= fun first_char -> take_while is_identifier_char >>| fun rest -> first_char ^ rest
 ;;
 
 let kw_unique = string "unique" <* skip_ws
 let kw_int = string "int" <* skip_ws
 let kw_string = string "string" <* skip_ws
+let kw_float = string "float" <* skip_ws
+let kw_boolean = string "boolean" <* skip_ws
 let lparen = char '(' <* skip_ws
 let rparen = char ')' <* skip_ws
 let colon = skip_ws *> char ':' <* skip_ws

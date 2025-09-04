@@ -1,0 +1,7 @@
+---
+library: false
+warnOnImplicitThis: false
+name: java-ql-extractor
+version: 0.0.1
+dependencies:
+  codeql/java-all: ^1.1.2

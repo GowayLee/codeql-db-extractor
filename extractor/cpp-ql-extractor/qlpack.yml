@@ -1,0 +1,8 @@
+---
+library: false
+warnOnImplicitThis: false
+compileForOverlayEval: false
+name: cpp-ql-extractor
+version: 0.0.1
+dependencies:
+  codeql/cpp-all: ^5.4.1

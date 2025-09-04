@@ -37,14 +37,14 @@ setup.log
 _opam/
 
 # Agents
+.agent-sync.toml
 .crush/
 .crush.json
+.claude/
 
 # CodeQL
 *.out
 **/codeql-db/
 mt-scripts/
 
-# semmlecode-parser
-semmlecode-parser/examples/
-semmlecode-parser/.agent-sync.toml
+examples/

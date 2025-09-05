@@ -33,17 +33,30 @@ let table_def_to_json (table : table_def) =
     ]
 ;;
 
-let assoc_def_to_json assoc =
+let union_def_to_json union =
   `Assoc
-    [ "name", `String assoc.name
-    ; "options", `List (List.map (fun opt -> `String opt) assoc.options)
+    [ "name", `String union.name
+    ; "options", `List (List.map (fun opt -> `String opt) union.options)
+    ]
+;;
+
+let enum_item_to_json enum_item =
+  `Assoc [ "id", `String enum_item.id; "table", `String enum_item.table ]
+;;
+
+let enum_def_to_json enum =
+  `Assoc
+    [ "table", `String enum.table
+    ; "filed", `String enum.field
+    ; "items", `List (List.map enum_item_to_json enum.items)
     ]
 ;;
 
 let scheme_to_json scheme =
   `Assoc
     [ "tables", `List (List.map table_def_to_json scheme.tables)
-    ; "associations", `List (List.map assoc_def_to_json scheme.assocs)
+    ; "unions", `List (List.map union_def_to_json scheme.unions)
+    ; "enums", `List (List.map enum_def_to_json scheme.enums)
     ]
 ;;
 

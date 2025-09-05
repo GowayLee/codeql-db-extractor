@@ -28,11 +28,6 @@ let space =
     | _ -> false)
 ;;
 
-(* enum of fileds *)
-let case =
-  string "case @" *> identifier *> char '.' *> identifier *> many_till any_char (char ';')
-;;
-
 (* keyset *)
 let keyset = string "#keyset[" *> many_till any_char (char ']')
 
@@ -43,7 +38,6 @@ let skip_ws =
        [ map line_comment ~f:(fun _ -> ())
        ; map block_comment ~f:(fun _ -> ())
        ; map whitespace ~f:(fun _ -> ())
-       ; map case ~f:(fun _ -> ())
        ; map keyset ~f:(fun _ -> ())
        ])
 ;;
@@ -54,7 +48,6 @@ let skip_spaces_only =
        [ map line_comment ~f:(fun _ -> ())
        ; map block_comment ~f:(fun _ -> ())
        ; map space ~f:(fun _ -> ())
-       ; map case ~f:(fun _ -> ())
        ; map keyset ~f:(fun _ -> ())
        ])
 ;;
@@ -68,19 +61,32 @@ let lparen = char '(' <* skip_ws
 let rparen = char ')' <* skip_ws
 let colon = skip_ws *> char ':' <* skip_ws
 let semicolon = char ';' <* skip_ws
+let at = char '@'
+let dot = char '.'
 
-(* assoc rerelated lex *)
+(* union related lex *)
 let equal = char '=' <* skip_spaces_only
 let pipe = char '|' <* skip_spaces_only
+let at_identifier = at *> identifier <* skip_spaces_only
 
-let line_assoc_terminator =
+let line_union_terminator =
   char ';' *> skip_ws *> return ()
   <|> end_of_line *> skip_ws *> return ()
   <|> end_of_input *> return ()
 ;;
 
-let block_assoc_terminator =
+let block_union_terminator =
   char ';' *> skip_ws *> return ()
   <|> skip_ws *> char ';' *> skip_ws *> return ()
   <|> end_of_input *> return ()
+;;
+
+(* enum related lex *)
+let kw_case = string "case" <* skip_ws
+let kw_of = string "of" <* skip_ws
+
+let number =
+  take_while1 (function
+    | '0' .. '9' -> true
+    | _ -> false)
 ;;

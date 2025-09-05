@@ -1,8 +1,8 @@
-open Semmle_helper.Table
-open Semmle_helper.Parser
-open Semmle_helper.Cli
-open Semmle_helper.Json_serializer
-open Semmle_helper.Logger
+open Semmlecode_parser.Table
+open Semmlecode_parser.Parser
+open Semmlecode_parser.Cli
+open Semmlecode_parser.Json_serializer
+open Semmlecode_parser.Logger
 open Angstrom
 
 let parse_input input =
@@ -12,7 +12,7 @@ let parse_input input =
 ;;
 
 let print_scheme = function
-  | { tables; assocs } ->
+  | { tables; unions; enums } ->
     List.iter
       (fun (table : table_def) ->
          Printf.printf "Table: %s\n" table.name;
@@ -40,12 +40,10 @@ let print_scheme = function
          print_newline ())
       tables;
     List.iter
-      (fun assoc ->
-         Printf.printf
-           "Association: %s -> [%s]\n"
-           assoc.name
-           (String.concat "; " assoc.options))
-      assocs
+      (fun union ->
+         Printf.printf "Union: %s -> [%s]\n" union.name (String.concat "; " union.options))
+      unions;
+    List.iter (fun enum -> Printf.printf "Enum: %s.%s\n" enum.table enum.field) enums
 ;;
 
 let () =

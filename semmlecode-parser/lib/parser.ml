@@ -2,21 +2,18 @@ open Angstrom
 open Lexer
 open Table
 
-(* 关联表 *)
-let association = char '@' *> identifier *> many_till any_char (char ';')
-
-(* 外键属性：@table ref *)
+(* foreign key：@table ref *)
 let foreign_key_attr =
-  char '@' *> identifier
+  at_identifier
   >>= fun ref_table -> skip_ws *> string "ref" *> skip_ws *> return (ForeignKey ref_table)
 ;;
 
-(* 主键属性：@table *)
+(* primary key：@table *)
 let primary_key_attr =
-  char '@' *> identifier >>= fun cur_table -> skip_ws *> return (PrimaryKey cur_table)
+  at_identifier >>= fun cur_table -> skip_ws *> return (PrimaryKey cur_table)
 ;;
 
-(* 基本类型引用属性：int ref 或 string ref *)
+(* basic ref：int ref / string ref *)
 let basic_ref_attr =
   kw_int *> string "ref" *> skip_ws *> return (BasicRef Int)
   <|> kw_string *> string "ref" *> skip_ws *> return (BasicRef String)
@@ -30,7 +27,7 @@ let attribute =
     [ foreign_key_attr; primary_key_attr; basic_ref_attr ]
 ;;
 
-(* 字段定义 *)
+(* field_def *)
 let field =
   Logger.info "Starting to parse field";
   option false (kw_unique *> return true)
@@ -56,19 +53,33 @@ let field =
   return { name; typ; attribute = attr }
 ;;
 
-(* 关联 *)
-let assoc_option = char '@' *> identifier <* skip_spaces_only
-
-let assoc =
-  char '@' *> identifier
+(* union_def *)
+let union =
+  at_identifier
   >>= fun name ->
-  Logger.info ("Starting to parse association: " ^ name);
+  Logger.info ("Starting to parse union: " ^ name);
   skip_spaces_only *> equal
   >>= fun _ ->
-  sep_by1 (skip_ws *> pipe) assoc_option
-  >>= (fun options -> block_assoc_terminator *> return { name; options })
-  <|> (sep_by1 (skip_spaces_only *> pipe) assoc_option
-       >>= fun options -> line_assoc_terminator *> return { name; options })
+  sep_by1 (skip_ws *> pipe) at_identifier
+  >>= (fun options -> block_union_terminator *> return { name; options })
+  <|> (sep_by1 (skip_spaces_only *> pipe) at_identifier
+       >>= fun options -> line_union_terminator *> return { name; options })
+;;
+
+(* enum *)
+let enum_item =
+  number
+  >>= fun id ->
+  skip_spaces_only *> equal *> at_identifier >>= fun table -> return { id; table }
+;;
+
+let enum =
+  kw_case *> at_identifier
+  >>= fun table ->
+  dot *> identifier
+  >>= fun field ->
+  skip_spaces_only *> kw_of *> sep_by1 (skip_ws *> pipe) enum_item
+  >>= fun items -> block_union_terminator *> return { table; field; items }
 ;;
 
 (* 表 *)
@@ -83,19 +94,26 @@ let table =
 ;;
 
 let table_element = table >>| fun t -> Table t
-let assoc_element = assoc >>| fun a -> Assoc a
-let scheme_element = skip_ws *> (table_element <|> assoc_element) <* skip_ws
+let union_element = union >>| fun a -> Union a
+let enum_element = enum >>| fun e -> Enum e
+
+let scheme_element =
+  skip_ws *> (table_element <|> union_element <|> enum_element) <* skip_ws
+;;
+
 let all_elements = many scheme_element
 
 let scheme_parser =
   all_elements
   >>= fun elements ->
   let tables = ref [] in
-  let assocs = ref [] in
+  let unions = ref [] in
+  let enums = ref [] in
   List.iter
     (function
       | Table t -> tables := t :: !tables
-      | Assoc a -> assocs := a :: !assocs)
+      | Union a -> unions := a :: !unions
+      | Enum e -> enums := e :: !enums)
     elements;
-  return { tables = List.rev !tables; assocs = List.rev !assocs }
+  return { tables = List.rev !tables; unions = List.rev !unions; enums = List.rev !enums }
 ;;

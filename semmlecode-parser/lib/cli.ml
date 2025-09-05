@@ -41,7 +41,7 @@ let parse_args () =
 ;;
 
 let print_usage () =
-  Printf.eprintf "Usage: semmle-helper [OPTIONS] <input-file>\n";
+  Printf.eprintf "Usage: semmlecode-parser [OPTIONS] <input-file>\n";
   Printf.eprintf "Options:\n";
   Printf.eprintf "  -v              Verbose mode (show info messages)\n";
   Printf.eprintf "  --json [FILE]   Output JSON to FILE (default: output.json)\n"

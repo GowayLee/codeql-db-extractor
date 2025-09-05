@@ -1,6 +1,6 @@
 (lang dune 3.20)
 
-(name semmle-helper)
+(name semmlecode-parser)
 
 (generate_opam_files true)
 
@@ -11,16 +11,16 @@
 
 (maintainers "Haoyuan Li <lihaoyuan0506@gmail.com>")
 
-(license GPL-3.0-only)
+(license MIT)
 
 (documentation https://github.com/gowaylee/codeql-db-extractor)
 
 (package
- (name semmle-helper)
- (synopsis "A short synopsis")
- (description "A longer description")
+ (name semmlecode-parser)
+ (synopsis "A Parser for semmlecode")
+ (description "A parser parsing semmlecode.dbscheme to json")
  (depends ocaml angstrom yojson)
  (tags
-  ("CodeQL")))
+  ("CodeQL" "semmle" "dbscheme")))
 
 ; See the complete stanza docs at https://dune.readthedocs.io/en/stable/reference/dune-project/index.html

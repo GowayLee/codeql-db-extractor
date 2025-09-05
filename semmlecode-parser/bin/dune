@@ -1,4 +1,4 @@
 (executable
- (public_name semmle-helper)
+ (public_name semmlecode_parser)
  (name main)
- (libraries semmle_helper))
+ (libraries semmlecode_parser))

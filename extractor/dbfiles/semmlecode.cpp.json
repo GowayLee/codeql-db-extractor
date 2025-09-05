@@ -1,0 +1,5050 @@
+{
+  "tables": [
+    {
+      "name": "compilations",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "compilation" }
+        },
+        {
+          "name": "cwd",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "compilation_args",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "compilation" }
+        },
+        {
+          "name": "num",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "arg",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "compilation_build_mode",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "compilation" }
+        },
+        {
+          "name": "mode",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "compilation_compiling_files",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "compilation" }
+        },
+        {
+          "name": "num",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "file",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "file" }
+        }
+      ]
+    },
+    {
+      "name": "compilation_time",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "compilation" }
+        },
+        {
+          "name": "num",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "kind",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "seconds",
+          "type": "float",
+          "attribute": { "type": "basic_ref", "field_type": "float" }
+        }
+      ]
+    },
+    {
+      "name": "diagnostic_for",
+      "fields": [
+        {
+          "name": "diagnostic",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "diagnostic" }
+        },
+        {
+          "name": "compilation",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "compilation" }
+        },
+        {
+          "name": "file_number",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "file_number_diagnostic_number",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "compilation_finished",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "compilation" }
+        },
+        {
+          "name": "cpu_seconds",
+          "type": "float",
+          "attribute": { "type": "basic_ref", "field_type": "float" }
+        },
+        {
+          "name": "elapsed_seconds",
+          "type": "float",
+          "attribute": { "type": "basic_ref", "field_type": "float" }
+        }
+      ]
+    },
+    {
+      "name": "externalData",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "externalDataElement" }
+        },
+        {
+          "name": "path",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "column",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "sourceLocationPrefix",
+      "fields": [
+        {
+          "name": "prefix",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "locations_default",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "location_default" }
+        },
+        {
+          "name": "file",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "file" }
+        },
+        {
+          "name": "beginLine",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "beginColumn",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "endLine",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "endColumn",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "files",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "file" }
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "folders",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "folder" }
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "containerparent",
+      "fields": [
+        {
+          "name": "parent",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "container" }
+        },
+        {
+          "name": "child",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "container" }
+        }
+      ]
+    },
+    {
+      "name": "numlines",
+      "fields": [
+        {
+          "name": "element_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "sourceline" }
+        },
+        {
+          "name": "num_lines",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "num_code",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "num_comment",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "diagnostics",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "diagnostic" }
+        },
+        {
+          "name": "severity",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "error_tag",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "error_message",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "full_error_message",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        }
+      ]
+    },
+    {
+      "name": "extractor_version",
+      "fields": [
+        {
+          "name": "codeql_version",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "frontend_version",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "fileannotations",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "file" }
+        },
+        {
+          "name": "kind",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "inmacroexpansion",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "element" }
+        },
+        {
+          "name": "inv",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "macroinvocation" }
+        }
+      ]
+    },
+    {
+      "name": "affectedbymacroexpansion",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "element" }
+        },
+        {
+          "name": "inv",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "macroinvocation" }
+        }
+      ]
+    },
+    {
+      "name": "macroinvocations",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "macroinvocation" }
+        },
+        {
+          "name": "macro_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "ppd_define" }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        },
+        {
+          "name": "kind",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "macroparent",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "macroinvocation" }
+        },
+        {
+          "name": "parent_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "macroinvocation" }
+        }
+      ]
+    },
+    {
+      "name": "macrolocationbind",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "macroinvocation" }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        }
+      ]
+    },
+    {
+      "name": "macro_argument_unexpanded",
+      "fields": [
+        {
+          "name": "invocation",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "macroinvocation" }
+        },
+        {
+          "name": "argument_index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "macro_argument_expanded",
+      "fields": [
+        {
+          "name": "invocation",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "macroinvocation" }
+        },
+        {
+          "name": "argument_index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "functions",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "function" }
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "kind",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "builtin_functions",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        }
+      ]
+    },
+    {
+      "name": "function_entry_point",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        },
+        {
+          "name": "entry_point",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt" }
+        }
+      ]
+    },
+    {
+      "name": "function_return_type",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        },
+        {
+          "name": "return_type",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "coroutine",
+      "fields": [
+        {
+          "name": "function",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        },
+        {
+          "name": "traits",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "coroutine_placeholder_variable",
+      "fields": [
+        {
+          "name": "placeholder_variable",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "variable" }
+        },
+        {
+          "name": "kind",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "function",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        }
+      ]
+    },
+    {
+      "name": "coroutine_new",
+      "fields": [
+        {
+          "name": "function",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        },
+        {
+          "name": "new",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        }
+      ]
+    },
+    {
+      "name": "coroutine_delete",
+      "fields": [
+        {
+          "name": "function",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        },
+        {
+          "name": "delete",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        }
+      ]
+    },
+    {
+      "name": "purefunctions",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        }
+      ]
+    },
+    {
+      "name": "function_deleted",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        }
+      ]
+    },
+    {
+      "name": "function_defaulted",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        }
+      ]
+    },
+    {
+      "name": "function_prototyped",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        }
+      ]
+    },
+    {
+      "name": "deduction_guide_for_class",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        },
+        {
+          "name": "class_template",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        }
+      ]
+    },
+    {
+      "name": "member_function_this_type",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        },
+        {
+          "name": "this_type",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "fun_decls",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "fun_decl" }
+        },
+        {
+          "name": "function",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        },
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        }
+      ]
+    },
+    {
+      "name": "fun_def",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "fun_decl" }
+        }
+      ]
+    },
+    {
+      "name": "fun_specialized",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "fun_decl" }
+        }
+      ]
+    },
+    {
+      "name": "fun_implicit",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "fun_decl" }
+        }
+      ]
+    },
+    {
+      "name": "fun_decl_specifiers",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "fun_decl" }
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "fun_decl_throws",
+      "fields": [
+        {
+          "name": "fun_decl",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "fun_decl" }
+        },
+        {
+          "name": "index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "fun_decl_empty_throws",
+      "fields": [
+        {
+          "name": "fun_decl",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "fun_decl" }
+        }
+      ]
+    },
+    {
+      "name": "fun_decl_noexcept",
+      "fields": [
+        {
+          "name": "fun_decl",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "fun_decl" }
+        },
+        {
+          "name": "constant",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        }
+      ]
+    },
+    {
+      "name": "fun_decl_empty_noexcept",
+      "fields": [
+        {
+          "name": "fun_decl",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "fun_decl" }
+        }
+      ]
+    },
+    {
+      "name": "fun_decl_typedef_type",
+      "fields": [
+        {
+          "name": "fun_decl",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "fun_decl" }
+        },
+        {
+          "name": "typedeftype_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        }
+      ]
+    },
+    {
+      "name": "fun_requires",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "fun_decl" }
+        },
+        {
+          "name": "kind",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "constraint",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        }
+      ]
+    },
+    {
+      "name": "param_decl_bind",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "var_decl" }
+        },
+        {
+          "name": "index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "fun_decl",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "fun_decl" }
+        }
+      ]
+    },
+    {
+      "name": "var_decls",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "var_decl" }
+        },
+        {
+          "name": "variable",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "variable" }
+        },
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        }
+      ]
+    },
+    {
+      "name": "var_def",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "var_decl" }
+        }
+      ]
+    },
+    {
+      "name": "var_specialized",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "var_decl" }
+        }
+      ]
+    },
+    {
+      "name": "var_decl_specifiers",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "var_decl" }
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "is_structured_binding",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "variable" }
+        }
+      ]
+    },
+    {
+      "name": "var_requires",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "var_decl" }
+        },
+        {
+          "name": "constraint",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        }
+      ]
+    },
+    {
+      "name": "type_decls",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "type_decl" }
+        },
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        }
+      ]
+    },
+    {
+      "name": "type_def",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type_decl" }
+        }
+      ]
+    },
+    {
+      "name": "type_decl_top",
+      "fields": [
+        {
+          "name": "type_decl",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type_decl" }
+        }
+      ]
+    },
+    {
+      "name": "type_requires",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type_decl" }
+        },
+        {
+          "name": "constraint",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        }
+      ]
+    },
+    {
+      "name": "namespace_decls",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "namespace_decl" }
+        },
+        {
+          "name": "namespace_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "namespace" }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        },
+        {
+          "name": "bodylocation",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        }
+      ]
+    },
+    {
+      "name": "usings",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "using" }
+        },
+        {
+          "name": "element_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "element" }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        },
+        {
+          "name": "kind",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "using_container",
+      "fields": [
+        {
+          "name": "parent",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "element" }
+        },
+        {
+          "name": "child",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "using" }
+        }
+      ]
+    },
+    {
+      "name": "static_asserts",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "static_assert" }
+        },
+        {
+          "name": "condition",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        },
+        {
+          "name": "message",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        },
+        {
+          "name": "enclosing",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "element" }
+        }
+      ]
+    },
+    {
+      "name": "params",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "parameter" }
+        },
+        {
+          "name": "function",
+          "type": "int",
+          "attribute": {
+            "type": "foreign_key",
+            "table": "parameterized_element"
+          }
+        },
+        {
+          "name": "index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "overrides",
+      "fields": [
+        {
+          "name": "new",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        },
+        {
+          "name": "old",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        }
+      ]
+    },
+    {
+      "name": "membervariables",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "membervariable" }
+        },
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "globalvariables",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "globalvariable" }
+        },
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "localvariables",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "localvariable" }
+        },
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "autoderivation",
+      "fields": [
+        {
+          "name": "var",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "variable" }
+        },
+        {
+          "name": "derivation_type",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "orphaned_variables",
+      "fields": [
+        {
+          "name": "var",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "localvariable" }
+        },
+        {
+          "name": "function",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        }
+      ]
+    },
+    {
+      "name": "enumconstants",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "enumconstant" }
+        },
+        {
+          "name": "parent",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        },
+        {
+          "name": "index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        }
+      ]
+    },
+    {
+      "name": "builtintypes",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "builtintype" }
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "kind",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "size",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "sign",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "alignment",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "derivedtypes",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "derivedtype" }
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "kind",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "pointerishsize",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "derivedtype" }
+        },
+        {
+          "name": "size",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "alignment",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "arraysizes",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "derivedtype" }
+        },
+        {
+          "name": "num_elements",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "bytesize",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "alignment",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "tupleelements",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "derivedtype" }
+        },
+        {
+          "name": "num_elements",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "typedefbase",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        },
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "decltypes",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "decltype" }
+        },
+        {
+          "name": "expr",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        },
+        {
+          "name": "kind",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "base_type",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        },
+        {
+          "name": "parentheses_would_change_meaning",
+          "type": "boolean",
+          "attribute": { "type": "basic_ref", "field_type": "boolean" }
+        }
+      ]
+    },
+    {
+      "name": "type_operators",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "type_operator" }
+        },
+        {
+          "name": "arg_type",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        },
+        {
+          "name": "kind",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "base_type",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "usertypes",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "usertype" }
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "kind",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "usertypesize",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        },
+        {
+          "name": "size",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "alignment",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "usertype_final",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        }
+      ]
+    },
+    {
+      "name": "usertype_uuid",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        },
+        {
+          "name": "uuid",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "usertype_alias_kind",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        },
+        {
+          "name": "alias_kind",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "nontype_template_parameters",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        }
+      ]
+    },
+    {
+      "name": "type_template_type_constraint",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        },
+        {
+          "name": "constraint",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        }
+      ]
+    },
+    {
+      "name": "mangled_name",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "declaration" }
+        },
+        {
+          "name": "mangled_name",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "mangledname" }
+        },
+        {
+          "name": "is_complete",
+          "type": "boolean",
+          "attribute": { "type": "basic_ref", "field_type": "boolean" }
+        }
+      ]
+    },
+    {
+      "name": "is_pod_class",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        }
+      ]
+    },
+    {
+      "name": "is_standard_layout_class",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        }
+      ]
+    },
+    {
+      "name": "is_complete",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        }
+      ]
+    },
+    {
+      "name": "is_class_template",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        }
+      ]
+    },
+    {
+      "name": "class_instantiation",
+      "fields": [
+        {
+          "name": "to",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        },
+        {
+          "name": "from",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        }
+      ]
+    },
+    {
+      "name": "class_template_argument",
+      "fields": [
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        },
+        {
+          "name": "index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "arg_type",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "class_template_argument_value",
+      "fields": [
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        },
+        {
+          "name": "index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "arg_value",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        }
+      ]
+    },
+    {
+      "name": "is_proxy_class_for",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        },
+        {
+          "name": "templ_param_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "user_or_decltype" }
+        }
+      ]
+    },
+    {
+      "name": "type_mentions",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "type_mention" }
+        },
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        },
+        {
+          "name": "kind",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "is_function_template",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        }
+      ]
+    },
+    {
+      "name": "function_instantiation",
+      "fields": [
+        {
+          "name": "to",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        },
+        {
+          "name": "from",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        }
+      ]
+    },
+    {
+      "name": "function_template_argument",
+      "fields": [
+        {
+          "name": "function_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        },
+        {
+          "name": "index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "arg_type",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "function_template_argument_value",
+      "fields": [
+        {
+          "name": "function_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        },
+        {
+          "name": "index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "arg_value",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        }
+      ]
+    },
+    {
+      "name": "is_variable_template",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "variable" }
+        }
+      ]
+    },
+    {
+      "name": "variable_instantiation",
+      "fields": [
+        {
+          "name": "to",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "variable" }
+        },
+        {
+          "name": "from",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "variable" }
+        }
+      ]
+    },
+    {
+      "name": "variable_template_argument",
+      "fields": [
+        {
+          "name": "variable_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "variable" }
+        },
+        {
+          "name": "index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "arg_type",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "variable_template_argument_value",
+      "fields": [
+        {
+          "name": "variable_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "variable" }
+        },
+        {
+          "name": "index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "arg_value",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        }
+      ]
+    },
+    {
+      "name": "template_template_instantiation",
+      "fields": [
+        {
+          "name": "to",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        },
+        {
+          "name": "from",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        }
+      ]
+    },
+    {
+      "name": "template_template_argument",
+      "fields": [
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        },
+        {
+          "name": "index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "arg_type",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "template_template_argument_value",
+      "fields": [
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        },
+        {
+          "name": "index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "arg_value",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        }
+      ]
+    },
+    {
+      "name": "concept_templates",
+      "fields": [
+        {
+          "name": "concept_id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "concept_template" }
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        }
+      ]
+    },
+    {
+      "name": "concept_instantiation",
+      "fields": [
+        {
+          "name": "to",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "concept_id" }
+        },
+        {
+          "name": "from",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "concept_template" }
+        }
+      ]
+    },
+    {
+      "name": "is_type_constraint",
+      "fields": [
+        {
+          "name": "concept_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "concept_id" }
+        }
+      ]
+    },
+    {
+      "name": "concept_template_argument",
+      "fields": [
+        {
+          "name": "concept_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "concept" }
+        },
+        {
+          "name": "index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "arg_type",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "concept_template_argument_value",
+      "fields": [
+        {
+          "name": "concept_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "concept" }
+        },
+        {
+          "name": "index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "arg_value",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        }
+      ]
+    },
+    {
+      "name": "routinetypes",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "routinetype" }
+        },
+        {
+          "name": "return_type",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "routinetypeargs",
+      "fields": [
+        {
+          "name": "routine",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "routinetype" }
+        },
+        {
+          "name": "index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "ptrtomembers",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "ptrtomember" }
+        },
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        },
+        {
+          "name": "class_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "specifiers",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "specifier" }
+        },
+        {
+          "name": "str",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "typespecifiers",
+      "fields": [
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        },
+        {
+          "name": "spec_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "specifier" }
+        }
+      ]
+    },
+    {
+      "name": "funspecifiers",
+      "fields": [
+        {
+          "name": "func_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        },
+        {
+          "name": "spec_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "specifier" }
+        }
+      ]
+    },
+    {
+      "name": "varspecifiers",
+      "fields": [
+        {
+          "name": "var_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "accessible" }
+        },
+        {
+          "name": "spec_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "specifier" }
+        }
+      ]
+    },
+    {
+      "name": "explicit_specifier_exprs",
+      "fields": [
+        {
+          "name": "func_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        },
+        {
+          "name": "constant",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        }
+      ]
+    },
+    {
+      "name": "attributes",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "attribute" }
+        },
+        {
+          "name": "kind",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "name_space",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        }
+      ]
+    },
+    {
+      "name": "attribute_args",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "attribute_arg" }
+        },
+        {
+          "name": "kind",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "attribute",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "attribute" }
+        },
+        {
+          "name": "index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        }
+      ]
+    },
+    {
+      "name": "attribute_arg_value",
+      "fields": [
+        {
+          "name": "arg",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "attribute_arg" }
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "attribute_arg_type",
+      "fields": [
+        {
+          "name": "arg",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "attribute_arg" }
+        },
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "attribute_arg_constant",
+      "fields": [
+        {
+          "name": "arg",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "attribute_arg" }
+        },
+        {
+          "name": "constant",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        }
+      ]
+    },
+    {
+      "name": "attribute_arg_expr",
+      "fields": [
+        {
+          "name": "arg",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "attribute_arg" }
+        },
+        {
+          "name": "expr",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        }
+      ]
+    },
+    {
+      "name": "attribute_arg_name",
+      "fields": [
+        {
+          "name": "arg",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "attribute_arg" }
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "typeattributes",
+      "fields": [
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        },
+        {
+          "name": "spec_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "attribute" }
+        }
+      ]
+    },
+    {
+      "name": "funcattributes",
+      "fields": [
+        {
+          "name": "func_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        },
+        {
+          "name": "spec_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "attribute" }
+        }
+      ]
+    },
+    {
+      "name": "varattributes",
+      "fields": [
+        {
+          "name": "var_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "accessible" }
+        },
+        {
+          "name": "spec_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "attribute" }
+        }
+      ]
+    },
+    {
+      "name": "namespaceattributes",
+      "fields": [
+        {
+          "name": "namespace_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "namespace" }
+        },
+        {
+          "name": "spec_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "attribute" }
+        }
+      ]
+    },
+    {
+      "name": "stmtattributes",
+      "fields": [
+        {
+          "name": "stmt_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt" }
+        },
+        {
+          "name": "spec_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "attribute" }
+        }
+      ]
+    },
+    {
+      "name": "unspecifiedtype",
+      "fields": [
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        },
+        {
+          "name": "unspecified_type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "member",
+      "fields": [
+        {
+          "name": "parent",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        },
+        {
+          "name": "index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "child",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "member" }
+        }
+      ]
+    },
+    {
+      "name": "enclosingfunction",
+      "fields": [
+        {
+          "name": "child",
+          "type": "int",
+          "attribute": {
+            "type": "foreign_key",
+            "table": "enclosingfunction_child"
+          }
+        },
+        {
+          "name": "parent",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        }
+      ]
+    },
+    {
+      "name": "derivations",
+      "fields": [
+        {
+          "name": "derivation",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "derivation" }
+        },
+        {
+          "name": "sub",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        },
+        {
+          "name": "index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "super",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        }
+      ]
+    },
+    {
+      "name": "derspecifiers",
+      "fields": [
+        {
+          "name": "der_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "derivation" }
+        },
+        {
+          "name": "spec_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "specifier" }
+        }
+      ]
+    },
+    {
+      "name": "direct_base_offsets",
+      "fields": [
+        {
+          "name": "der_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "derivation" }
+        },
+        {
+          "name": "offset",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "virtual_base_offsets",
+      "fields": [
+        {
+          "name": "sub",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        },
+        {
+          "name": "super",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "usertype" }
+        },
+        {
+          "name": "offset",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "frienddecls",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "frienddecl" }
+        },
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        },
+        {
+          "name": "decl_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "declaration" }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        }
+      ]
+    },
+    {
+      "name": "comments",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "comment" }
+        },
+        {
+          "name": "contents",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        }
+      ]
+    },
+    {
+      "name": "commentbinding",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "comment" }
+        },
+        {
+          "name": "element",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "element" }
+        }
+      ]
+    },
+    {
+      "name": "exprconv",
+      "fields": [
+        {
+          "name": "converted",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        },
+        {
+          "name": "conversion",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        }
+      ]
+    },
+    {
+      "name": "compgenerated",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "element" }
+        }
+      ]
+    },
+    {
+      "name": "synthetic_destructor_call",
+      "fields": [
+        {
+          "name": "element",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "element" }
+        },
+        {
+          "name": "i",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "destructor_call",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "routineexpr" }
+        }
+      ]
+    },
+    {
+      "name": "namespaces",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "namespace" }
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "namespace_inline",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "namespace" }
+        }
+      ]
+    },
+    {
+      "name": "namespacembrs",
+      "fields": [
+        {
+          "name": "parentid",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "namespace" }
+        },
+        {
+          "name": "memberid",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "namespacembr" }
+        }
+      ]
+    },
+    {
+      "name": "exprparents",
+      "fields": [
+        {
+          "name": "expr_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        },
+        {
+          "name": "child_index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "parent_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "exprparent" }
+        }
+      ]
+    },
+    {
+      "name": "expr_isload",
+      "fields": [
+        {
+          "name": "expr_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        }
+      ]
+    },
+    {
+      "name": "conversionkinds",
+      "fields": [
+        {
+          "name": "expr_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "cast" }
+        },
+        {
+          "name": "kind",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "iscall",
+      "fields": [
+        {
+          "name": "caller",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "funbindexpr" }
+        },
+        {
+          "name": "kind",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "numtemplatearguments",
+      "fields": [
+        {
+          "name": "expr_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        },
+        {
+          "name": "num",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "specialnamequalifyingelements",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": {
+            "type": "primary_key",
+            "table": "specialnamequalifyingelement"
+          }
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "namequalifiers",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "namequalifier" }
+        },
+        {
+          "name": "qualifiableelement",
+          "type": "int",
+          "attribute": {
+            "type": "foreign_key",
+            "table": "namequalifiableelement"
+          }
+        },
+        {
+          "name": "qualifyingelement",
+          "type": "int",
+          "attribute": {
+            "type": "foreign_key",
+            "table": "namequalifyingelement"
+          }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        }
+      ]
+    },
+    {
+      "name": "varbind",
+      "fields": [
+        {
+          "name": "expr",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "varbindexpr" }
+        },
+        {
+          "name": "var",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "accessible" }
+        }
+      ]
+    },
+    {
+      "name": "funbind",
+      "fields": [
+        {
+          "name": "expr",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "funbindexpr" }
+        },
+        {
+          "name": "fun",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        }
+      ]
+    },
+    {
+      "name": "expr_allocator",
+      "fields": [
+        {
+          "name": "expr",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "any_new_expr" }
+        },
+        {
+          "name": "func",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        },
+        {
+          "name": "form",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "expr_deallocator",
+      "fields": [
+        {
+          "name": "expr",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "new_or_delete_expr" }
+        },
+        {
+          "name": "func",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        },
+        {
+          "name": "form",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "expr_cond_two_operand",
+      "fields": [
+        {
+          "name": "cond",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "conditionalexpr" }
+        }
+      ]
+    },
+    {
+      "name": "expr_cond_guard",
+      "fields": [
+        {
+          "name": "cond",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "conditionalexpr" }
+        },
+        {
+          "name": "guard",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        }
+      ]
+    },
+    {
+      "name": "expr_cond_true",
+      "fields": [
+        {
+          "name": "cond",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "conditionalexpr" }
+        },
+        {
+          "name": "true",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        }
+      ]
+    },
+    {
+      "name": "expr_cond_false",
+      "fields": [
+        {
+          "name": "cond",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "conditionalexpr" }
+        },
+        {
+          "name": "false",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        }
+      ]
+    },
+    {
+      "name": "values",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "value" }
+        },
+        {
+          "name": "str",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "valuetext",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "value" }
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "valuebind",
+      "fields": [
+        {
+          "name": "val",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "value" }
+        },
+        {
+          "name": "expr",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        }
+      ]
+    },
+    {
+      "name": "fieldoffsets",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "variable" }
+        },
+        {
+          "name": "byteoffset",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "bitoffset",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "bitfield",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "variable" }
+        },
+        {
+          "name": "bits",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "declared_bits",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "initialisers",
+      "fields": [
+        {
+          "name": "init",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "initialiser" }
+        },
+        {
+          "name": "var",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "accessible" }
+        },
+        {
+          "name": "expr",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        }
+      ]
+    },
+    {
+      "name": "braced_initialisers",
+      "fields": [
+        {
+          "name": "init",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "initialiser" }
+        }
+      ]
+    },
+    {
+      "name": "expr_ancestor",
+      "fields": [
+        {
+          "name": "exp",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        },
+        {
+          "name": "ancestor",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "element" }
+        }
+      ]
+    },
+    {
+      "name": "exprs",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "expr" }
+        },
+        {
+          "name": "kind",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        }
+      ]
+    },
+    {
+      "name": "expr_reuse",
+      "fields": [
+        {
+          "name": "reuse",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        },
+        {
+          "name": "original",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        },
+        {
+          "name": "value_category",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "expr_types",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        },
+        {
+          "name": "typeid",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        },
+        {
+          "name": "value_category",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        }
+      ]
+    },
+    {
+      "name": "compound_requirement_is_noexcept",
+      "fields": [
+        {
+          "name": "expr",
+          "type": "int",
+          "attribute": {
+            "type": "foreign_key",
+            "table": "compound_requirement"
+          }
+        }
+      ]
+    },
+    {
+      "name": "new_allocated_type",
+      "fields": [
+        {
+          "name": "expr",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "new_expr" }
+        },
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "new_array_allocated_type",
+      "fields": [
+        {
+          "name": "expr",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "new_array_expr" }
+        },
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "aggregate_field_init",
+      "fields": [
+        {
+          "name": "aggregate",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "aggregateliteral" }
+        },
+        {
+          "name": "initializer",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        },
+        {
+          "name": "field",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "membervariable" }
+        },
+        {
+          "name": "position",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "is_designated",
+          "type": "boolean",
+          "attribute": { "type": "basic_ref", "field_type": "boolean" }
+        }
+      ]
+    },
+    {
+      "name": "aggregate_array_init",
+      "fields": [
+        {
+          "name": "aggregate",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "aggregateliteral" }
+        },
+        {
+          "name": "initializer",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        },
+        {
+          "name": "element_index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "position",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "is_designated",
+          "type": "boolean",
+          "attribute": { "type": "basic_ref", "field_type": "boolean" }
+        }
+      ]
+    },
+    {
+      "name": "condition_decl_bind",
+      "fields": [
+        {
+          "name": "expr",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "condition_decl" }
+        },
+        {
+          "name": "decl",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "declaration" }
+        }
+      ]
+    },
+    {
+      "name": "typeid_bind",
+      "fields": [
+        {
+          "name": "expr",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type_id" }
+        },
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "uuidof_bind",
+      "fields": [
+        {
+          "name": "expr",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "uuidof" }
+        },
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "sizeof_bind",
+      "fields": [
+        {
+          "name": "expr",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "sizeof_or_alignof" }
+        },
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        }
+      ]
+    },
+    {
+      "name": "code_block",
+      "fields": [
+        {
+          "name": "block",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "literal" }
+        },
+        {
+          "name": "routine",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "function" }
+        }
+      ]
+    },
+    {
+      "name": "lambdas",
+      "fields": [
+        {
+          "name": "expr",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "lambdaexpr" }
+        },
+        {
+          "name": "default_capture",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "has_explicit_return_type",
+          "type": "boolean",
+          "attribute": { "type": "basic_ref", "field_type": "boolean" }
+        },
+        {
+          "name": "has_explicit_parameter_list",
+          "type": "boolean",
+          "attribute": { "type": "basic_ref", "field_type": "boolean" }
+        }
+      ]
+    },
+    {
+      "name": "lambda_capture",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "lambdacapture" }
+        },
+        {
+          "name": "lambda",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "lambdaexpr" }
+        },
+        {
+          "name": "index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "field",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "membervariable" }
+        },
+        {
+          "name": "captured_by_reference",
+          "type": "boolean",
+          "attribute": { "type": "basic_ref", "field_type": "boolean" }
+        },
+        {
+          "name": "is_implicit",
+          "type": "boolean",
+          "attribute": { "type": "basic_ref", "field_type": "boolean" }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        }
+      ]
+    },
+    {
+      "name": "fold",
+      "fields": [
+        {
+          "name": "expr",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "foldexpr" }
+        },
+        {
+          "name": "operator",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "is_left_fold",
+          "type": "boolean",
+          "attribute": { "type": "basic_ref", "field_type": "boolean" }
+        }
+      ]
+    },
+    {
+      "name": "stmts",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "stmt" }
+        },
+        {
+          "name": "kind",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        }
+      ]
+    },
+    {
+      "name": "type_vla",
+      "fields": [
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "type" }
+        },
+        {
+          "name": "decl",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt_vla_decl" }
+        }
+      ]
+    },
+    {
+      "name": "variable_vla",
+      "fields": [
+        {
+          "name": "var",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "variable" }
+        },
+        {
+          "name": "decl",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt_vla_decl" }
+        }
+      ]
+    },
+    {
+      "name": "type_is_vla",
+      "fields": [
+        {
+          "name": "type_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "derivedtype" }
+        }
+      ]
+    },
+    {
+      "name": "if_initialization",
+      "fields": [
+        {
+          "name": "if_stmt",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt_if" }
+        },
+        {
+          "name": "init_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt" }
+        }
+      ]
+    },
+    {
+      "name": "if_then",
+      "fields": [
+        {
+          "name": "if_stmt",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt_if" }
+        },
+        {
+          "name": "then_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt" }
+        }
+      ]
+    },
+    {
+      "name": "if_else",
+      "fields": [
+        {
+          "name": "if_stmt",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt_if" }
+        },
+        {
+          "name": "else_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt" }
+        }
+      ]
+    },
+    {
+      "name": "constexpr_if_initialization",
+      "fields": [
+        {
+          "name": "constexpr_if_stmt",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt_constexpr_if" }
+        },
+        {
+          "name": "init_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt" }
+        }
+      ]
+    },
+    {
+      "name": "constexpr_if_then",
+      "fields": [
+        {
+          "name": "constexpr_if_stmt",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt_constexpr_if" }
+        },
+        {
+          "name": "then_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt" }
+        }
+      ]
+    },
+    {
+      "name": "constexpr_if_else",
+      "fields": [
+        {
+          "name": "constexpr_if_stmt",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt_constexpr_if" }
+        },
+        {
+          "name": "else_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt" }
+        }
+      ]
+    },
+    {
+      "name": "consteval_if_then",
+      "fields": [
+        {
+          "name": "constexpr_if_stmt",
+          "type": "int",
+          "attribute": {
+            "type": "foreign_key",
+            "table": "stmt_consteval_or_not_consteval_if"
+          }
+        },
+        {
+          "name": "then_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt" }
+        }
+      ]
+    },
+    {
+      "name": "consteval_if_else",
+      "fields": [
+        {
+          "name": "constexpr_if_stmt",
+          "type": "int",
+          "attribute": {
+            "type": "foreign_key",
+            "table": "stmt_consteval_or_not_consteval_if"
+          }
+        },
+        {
+          "name": "else_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt" }
+        }
+      ]
+    },
+    {
+      "name": "while_body",
+      "fields": [
+        {
+          "name": "while_stmt",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt_while" }
+        },
+        {
+          "name": "body_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt" }
+        }
+      ]
+    },
+    {
+      "name": "do_body",
+      "fields": [
+        {
+          "name": "do_stmt",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt_end_test_while" }
+        },
+        {
+          "name": "body_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt" }
+        }
+      ]
+    },
+    {
+      "name": "switch_initialization",
+      "fields": [
+        {
+          "name": "switch_stmt",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt_switch" }
+        },
+        {
+          "name": "init_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt" }
+        }
+      ]
+    },
+    {
+      "name": "switch_case",
+      "fields": [
+        {
+          "name": "switch_stmt",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt_switch" }
+        },
+        {
+          "name": "index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "case_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt_switch_case" }
+        }
+      ]
+    },
+    {
+      "name": "switch_body",
+      "fields": [
+        {
+          "name": "switch_stmt",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt_switch" }
+        },
+        {
+          "name": "body_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt" }
+        }
+      ]
+    },
+    {
+      "name": "for_initialization",
+      "fields": [
+        {
+          "name": "for_stmt",
+          "type": "int",
+          "attribute": {
+            "type": "foreign_key",
+            "table": "stmt_for_or_range_based_for"
+          }
+        },
+        {
+          "name": "init_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt" }
+        }
+      ]
+    },
+    {
+      "name": "for_condition",
+      "fields": [
+        {
+          "name": "for_stmt",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt_for" }
+        },
+        {
+          "name": "condition_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        }
+      ]
+    },
+    {
+      "name": "for_update",
+      "fields": [
+        {
+          "name": "for_stmt",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt_for" }
+        },
+        {
+          "name": "update_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "expr" }
+        }
+      ]
+    },
+    {
+      "name": "for_body",
+      "fields": [
+        {
+          "name": "for_stmt",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt_for" }
+        },
+        {
+          "name": "body_id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt" }
+        }
+      ]
+    },
+    {
+      "name": "stmtparents",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt" }
+        },
+        {
+          "name": "index",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "parent",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmtparent" }
+        }
+      ]
+    },
+    {
+      "name": "ishandler",
+      "fields": [
+        {
+          "name": "block",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt_block" }
+        }
+      ]
+    },
+    {
+      "name": "stmt_decl_bind",
+      "fields": [
+        {
+          "name": "stmt",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt_decl" }
+        },
+        {
+          "name": "num",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "decl",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "declaration" }
+        }
+      ]
+    },
+    {
+      "name": "stmt_decl_entry_bind",
+      "fields": [
+        {
+          "name": "stmt",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt_decl" }
+        },
+        {
+          "name": "num",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "decl_entry",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "element" }
+        }
+      ]
+    },
+    {
+      "name": "blockscope",
+      "fields": [
+        {
+          "name": "block",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt_block" }
+        },
+        {
+          "name": "enclosing",
+          "type": "int",
+          "attribute": {
+            "type": "foreign_key",
+            "table": "parameterized_element"
+          }
+        }
+      ]
+    },
+    {
+      "name": "jumpinfo",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "jumporlabel" }
+        },
+        {
+          "name": "str",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "target",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "stmt" }
+        }
+      ]
+    },
+    {
+      "name": "preprocdirects",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "preprocdirect" }
+        },
+        {
+          "name": "kind",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        }
+      ]
+    },
+    {
+      "name": "preprocpair",
+      "fields": [
+        {
+          "name": "begin",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "ppd_branch" }
+        },
+        {
+          "name": "elseelifend",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "preprocdirect" }
+        }
+      ]
+    },
+    {
+      "name": "preproctrue",
+      "fields": [
+        {
+          "name": "branch",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "ppd_branch" }
+        }
+      ]
+    },
+    {
+      "name": "preprocfalse",
+      "fields": [
+        {
+          "name": "branch",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "ppd_branch" }
+        }
+      ]
+    },
+    {
+      "name": "preproctext",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "preprocdirect" }
+        },
+        {
+          "name": "head",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "body",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "includes",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "ppd_include" }
+        },
+        {
+          "name": "included",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "file" }
+        }
+      ]
+    },
+    {
+      "name": "link_targets",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "link_target" }
+        },
+        {
+          "name": "binary",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "file" }
+        }
+      ]
+    },
+    {
+      "name": "link_parent",
+      "fields": [
+        {
+          "name": "element",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "element" }
+        },
+        {
+          "name": "link_target",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "link_target" }
+        }
+      ]
+    },
+    {
+      "name": "xmlEncoding",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "file" }
+        },
+        {
+          "name": "encoding",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        }
+      ]
+    },
+    {
+      "name": "xmlDTDs",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "xmldtd" }
+        },
+        {
+          "name": "root",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "publicId",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "systemId",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "fileid",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "file" }
+        }
+      ]
+    },
+    {
+      "name": "xmlElements",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "xmlelement" }
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "parentid",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "xmlparent" }
+        },
+        {
+          "name": "idx",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "fileid",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "file" }
+        }
+      ]
+    },
+    {
+      "name": "xmlAttrs",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "xmlattribute" }
+        },
+        {
+          "name": "elementid",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "xmlelement" }
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "idx",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "fileid",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "file" }
+        }
+      ]
+    },
+    {
+      "name": "xmlNs",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "xmlnamespace" }
+        },
+        {
+          "name": "prefixName",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "URI",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "fileid",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "file" }
+        }
+      ]
+    },
+    {
+      "name": "xmlHasNs",
+      "fields": [
+        {
+          "name": "elementId",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "xmlnamespaceable" }
+        },
+        {
+          "name": "nsId",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "xmlnamespace" }
+        },
+        {
+          "name": "fileid",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "file" }
+        }
+      ]
+    },
+    {
+      "name": "xmlComments",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "xmlcomment" }
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "parentid",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "xmlparent" }
+        },
+        {
+          "name": "fileid",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "file" }
+        }
+      ]
+    },
+    {
+      "name": "xmlChars",
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "attribute": { "type": "primary_key", "table": "xmlcharacters" }
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "attribute": { "type": "basic_ref", "field_type": "string" }
+        },
+        {
+          "name": "parentid",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "xmlparent" }
+        },
+        {
+          "name": "idx",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "isCDATA",
+          "type": "int",
+          "attribute": { "type": "basic_ref", "field_type": "int" }
+        },
+        {
+          "name": "fileid",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "file" }
+        }
+      ]
+    },
+    {
+      "name": "xmllocations",
+      "fields": [
+        {
+          "name": "xmlElement",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "xmllocatable" }
+        },
+        {
+          "name": "location",
+          "type": "int",
+          "attribute": { "type": "foreign_key", "table": "location_default" }
+        }
+      ]
+    }
+  ],
+  "unions": [
+    { "name": "container", "options": ["file", "folder"] },
+    {
+      "name": "sourceline",
+      "options": [
+        "file",
+        "function",
+        "variable",
+        "enumconstant",
+        "xmllocatable"
+      ]
+    },
+    {
+      "name": "variable",
+      "options": ["localscopevariable", "globalvariable", "membervariable"]
+    },
+    { "name": "localscopevariable", "options": ["localvariable", "parameter"] },
+    { "name": "user_or_decltype", "options": ["usertype", "decltype"] },
+    { "name": "concept", "options": ["concept_template", "concept_id"] },
+    {
+      "name": "type",
+      "options": [
+        "builtintype",
+        "derivedtype",
+        "usertype",
+        "routinetype",
+        "ptrtomember",
+        "decltype",
+        "type_operator"
+      ]
+    },
+    {
+      "name": "enclosingfunction_child",
+      "options": ["usertype", "variable", "namespace"]
+    },
+    { "name": "declaredtype", "options": ["usertype"] },
+    {
+      "name": "declaration",
+      "options": [
+        "function",
+        "declaredtype",
+        "variable",
+        "enumconstant",
+        "frienddecl",
+        "concept_template"
+      ]
+    },
+    {
+      "name": "member",
+      "options": ["membervariable", "function", "declaredtype", "enumconstant"]
+    },
+    {
+      "name": "locatable",
+      "options": [
+        "diagnostic",
+        "declaration",
+        "ppd_include",
+        "ppd_define",
+        "macroinvocation",
+        "xmllocatable",
+        "attribute",
+        "attribute_arg"
+      ]
+    },
+    { "name": "namedscope", "options": ["namespace", "usertype"] },
+    {
+      "name": "element",
+      "options": [
+        "locatable",
+        "file",
+        "folder",
+        "specifier",
+        "type",
+        "expr",
+        "namespace",
+        "initialiser",
+        "stmt",
+        "derivation",
+        "comment",
+        "preprocdirect",
+        "fun_decl",
+        "var_decl",
+        "type_decl",
+        "namespace_decl",
+        "using",
+        "namequalifier",
+        "specialnamequalifyingelement",
+        "static_assert",
+        "type_mention",
+        "lambdacapture"
+      ]
+    },
+    { "name": "exprparent", "options": ["element"] },
+    { "name": "namespacembr", "options": ["declaration", "namespace"] },
+    {
+      "name": "cast",
+      "options": [
+        "c_style_cast",
+        "const_cast",
+        "dynamic_cast",
+        "reinterpret_cast",
+        "static_cast"
+      ]
+    },
+    {
+      "name": "conversion",
+      "options": [
+        "cast",
+        "array_to_pointer",
+        "parexpr",
+        "reference_to",
+        "ref_indirect",
+        "temp_init",
+        "c11_generic"
+      ]
+    },
+    { "name": "namequalifiableelement", "options": ["expr", "namequalifier"] },
+    {
+      "name": "namequalifyingelement",
+      "options": ["namespace", "specialnamequalifyingelement", "usertype"]
+    },
+    { "name": "any_new_expr", "options": ["new_expr", "new_array_expr"] },
+    {
+      "name": "new_or_delete_expr",
+      "options": ["any_new_expr", "delete_expr", "delete_array_expr"]
+    },
+    {
+      "name": "prefix_crement_expr",
+      "options": ["preincrexpr", "predecrexpr"]
+    },
+    {
+      "name": "postfix_crement_expr",
+      "options": ["postincrexpr", "postdecrexpr"]
+    },
+    { "name": "increment_expr", "options": ["preincrexpr", "postincrexpr"] },
+    { "name": "decrement_expr", "options": ["predecrexpr", "postdecrexpr"] },
+    { "name": "crement_expr", "options": ["increment_expr", "decrement_expr"] },
+    {
+      "name": "un_arith_op_expr",
+      "options": [
+        "arithnegexpr",
+        "unaryplusexpr",
+        "conjugation",
+        "realpartexpr",
+        "imagpartexpr",
+        "crement_expr"
+      ]
+    },
+    { "name": "un_bitwise_op_expr", "options": ["complementexpr"] },
+    { "name": "un_log_op_expr", "options": ["notexpr"] },
+    {
+      "name": "un_op_expr",
+      "options": [
+        "address_of",
+        "indirect",
+        "un_arith_op_expr",
+        "un_bitwise_op_expr",
+        "builtinaddressof",
+        "vec_fill",
+        "un_log_op_expr",
+        "co_await",
+        "co_yield"
+      ]
+    },
+    {
+      "name": "bin_log_op_expr",
+      "options": ["andlogicalexpr", "orlogicalexpr"]
+    },
+    { "name": "cmp_op_expr", "options": ["eq_op_expr", "rel_op_expr"] },
+    { "name": "eq_op_expr", "options": ["eqexpr", "neexpr"] },
+    {
+      "name": "rel_op_expr",
+      "options": ["gtexpr", "ltexpr", "geexpr", "leexpr", "spaceshipexpr"]
+    },
+    {
+      "name": "bin_bitwise_op_expr",
+      "options": ["lshiftexpr", "rshiftexpr", "andexpr", "orexpr", "xorexpr"]
+    },
+    {
+      "name": "p_arith_op_expr",
+      "options": ["paddexpr", "psubexpr", "pdiffexpr"]
+    },
+    {
+      "name": "bin_arith_op_expr",
+      "options": [
+        "addexpr",
+        "subexpr",
+        "mulexpr",
+        "divexpr",
+        "remexpr",
+        "jmulexpr",
+        "jdivexpr",
+        "fjaddexpr",
+        "jfaddexpr",
+        "fjsubexpr",
+        "jfsubexpr",
+        "minexpr",
+        "maxexpr",
+        "p_arith_op_expr"
+      ]
+    },
+    {
+      "name": "bin_op_expr",
+      "options": [
+        "bin_arith_op_expr",
+        "bin_bitwise_op_expr",
+        "cmp_op_expr",
+        "bin_log_op_expr"
+      ]
+    },
+    {
+      "name": "op_expr",
+      "options": ["un_op_expr", "bin_op_expr", "assign_expr", "conditionalexpr"]
+    },
+    {
+      "name": "assign_arith_expr",
+      "options": [
+        "assignaddexpr",
+        "assignsubexpr",
+        "assignmulexpr",
+        "assigndivexpr",
+        "assignremexpr"
+      ]
+    },
+    {
+      "name": "assign_bitwise_expr",
+      "options": [
+        "assignandexpr",
+        "assignorexpr",
+        "assignxorexpr",
+        "assignlshiftexpr",
+        "assignrshiftexpr"
+      ]
+    },
+    {
+      "name": "assign_pointer_expr",
+      "options": ["assignpaddexpr", "assignpsubexpr"]
+    },
+    {
+      "name": "assign_op_expr",
+      "options": [
+        "assign_arith_expr",
+        "assign_bitwise_expr",
+        "assign_pointer_expr"
+      ]
+    },
+    {
+      "name": "assign_expr",
+      "options": ["assignexpr", "assign_op_expr", "blockassignexpr"]
+    },
+    {
+      "name": "var_args_expr",
+      "options": ["vastartexpr", "vaendexpr", "vaargexpr", "vacopyexpr"]
+    },
+    {
+      "name": "builtin_op",
+      "options": [
+        "var_args_expr",
+        "noopexpr",
+        "offsetofexpr",
+        "intaddrexpr",
+        "hasassignexpr",
+        "hascopyexpr",
+        "hasnothrowassign",
+        "hasnothrowconstr",
+        "hasnothrowcopy",
+        "hastrivialassign",
+        "hastrivialconstr",
+        "hastrivialcopy",
+        "hastrivialdestructor",
+        "hasuserdestr",
+        "hasvirtualdestr",
+        "isabstractexpr",
+        "isbaseofexpr",
+        "isclassexpr",
+        "isconvtoexpr",
+        "isemptyexpr",
+        "isenumexpr",
+        "ispodexpr",
+        "ispolyexpr",
+        "isunionexpr",
+        "typescompexpr",
+        "builtinshufflevector",
+        "builtinconvertvector",
+        "builtinaddressof",
+        "istriviallyconstructibleexpr",
+        "isdestructibleexpr",
+        "isnothrowdestructibleexpr",
+        "istriviallydestructibleexpr",
+        "istriviallyassignableexpr",
+        "isnothrowassignableexpr",
+        "istrivialexpr",
+        "isstandardlayoutexpr",
+        "istriviallycopyableexpr",
+        "isliteraltypeexpr",
+        "hastrivialmoveconstructorexpr",
+        "hastrivialmoveassignexpr",
+        "hasnothrowmoveassignexpr",
+        "isconstructibleexpr",
+        "isnothrowconstructibleexpr",
+        "hasfinalizerexpr",
+        "isdelegateexpr",
+        "isinterfaceclassexpr",
+        "isrefarrayexpr",
+        "isrefclassexpr",
+        "issealedexpr",
+        "issimplevalueclassexpr",
+        "isvalueclassexpr",
+        "isfinalexpr",
+        "builtinchooseexpr",
+        "builtincomplex",
+        "isassignable",
+        "isaggregate",
+        "hasuniqueobjectrepresentations",
+        "builtinbitcast",
+        "builtinshuffle",
+        "issame",
+        "isfunction",
+        "islayoutcompatible",
+        "ispointerinterconvertiblebaseof",
+        "isarray",
+        "arrayrank",
+        "arrayextent",
+        "isarithmetic",
+        "iscompletetype",
+        "iscompound",
+        "isconst",
+        "isfloatingpoint",
+        "isfundamental",
+        "isintegral",
+        "islvaluereference",
+        "ismemberfunctionpointer",
+        "ismemberobjectpointer",
+        "ismemberpointer",
+        "isobject",
+        "ispointer",
+        "isreference",
+        "isrvaluereference",
+        "isscalar",
+        "issigned",
+        "isunsigned",
+        "isvoid",
+        "isvolatile",
+        "istriviallycopyassignable",
+        "isassignablenopreconditioncheck",
+        "referencebindstotemporary",
+        "issameas",
+        "builtinhasattribute",
+        "ispointerinterconvertiblewithclass",
+        "builtinispointerinterconvertiblewithclass",
+        "iscorrespondingmember",
+        "builtiniscorrespondingmember",
+        "isboundedarray",
+        "isunboundedarray",
+        "isreferenceable",
+        "isnothrowconvertible",
+        "referenceconstructsfromtemporary",
+        "referenceconvertsfromtemporary",
+        "isconvertible",
+        "isvalidwinrttype",
+        "iswinclass",
+        "iswininterface",
+        "istriviallyequalitycomparable",
+        "isscopedenum",
+        "istriviallyrelocatable"
+      ]
+    },
+    {
+      "name": "ctorinit",
+      "options": [
+        "ctordirectinit",
+        "ctorvirtualinit",
+        "ctorfieldinit",
+        "ctordelegatinginit"
+      ]
+    },
+    {
+      "name": "dtordestruct",
+      "options": [
+        "dtordirectdestruct",
+        "dtorvirtualdestruct",
+        "dtorfielddestruct"
+      ]
+    },
+    {
+      "name": "sizeof_or_alignof",
+      "options": [
+        "runtime_sizeof",
+        "runtime_alignof",
+        "datasizeof",
+        "sizeof_pack"
+      ]
+    },
+    {
+      "name": "funbindexpr",
+      "options": [
+        "routineexpr",
+        "new_expr",
+        "delete_expr",
+        "delete_array_expr",
+        "ctordirectinit",
+        "ctorvirtualinit",
+        "ctordelegatinginit",
+        "dtordirectdestruct",
+        "dtorvirtualdestruct"
+      ]
+    },
+    {
+      "name": "varbindexpr",
+      "options": ["varaccess", "ctorfieldinit", "dtorfielddestruct"]
+    },
+    { "name": "addressable", "options": ["function", "variable"] },
+    { "name": "accessible", "options": ["addressable", "enumconstant"] },
+    { "name": "access", "options": ["varaccess", "routineexpr"] },
+    {
+      "name": "stmt_consteval_or_not_consteval_if",
+      "options": ["stmt_consteval_if", "stmt_not_consteval_if"]
+    },
+    {
+      "name": "stmt_for_or_range_based_for",
+      "options": ["stmt_for", "stmt_range_based_for"]
+    },
+    { "name": "stmtparent", "options": ["stmt", "expr_stmt"] },
+    {
+      "name": "cfgnode",
+      "options": ["stmt", "expr", "function", "initialiser"]
+    },
+    {
+      "name": "parameterized_element",
+      "options": ["function", "stmt_block", "requires_expr"]
+    },
+    {
+      "name": "jump",
+      "options": ["stmt_goto", "stmt_break", "stmt_continue", "stmt_leave"]
+    },
+    { "name": "jumporlabel", "options": ["jump", "stmt_label", "literal"] },
+    {
+      "name": "ppd_include",
+      "options": [
+        "ppd_plain_include",
+        "ppd_objc_import",
+        "ppd_include_next",
+        "ppd_ms_import"
+      ]
+    },
+    {
+      "name": "ppd_branch",
+      "options": [
+        "ppd_if",
+        "ppd_ifdef",
+        "ppd_ifndef",
+        "ppd_elif",
+        "ppd_elifdef",
+        "ppd_elifndef"
+      ]
+    },
+    { "name": "xmlparent", "options": ["file", "xmlelement"] },
+    { "name": "xmlnamespaceable", "options": ["xmlelement", "xmlattribute"] },
+    {
+      "name": "xmllocatable",
+      "options": [
+        "xmlcharacters",
+        "xmlelement",
+        "xmlcomment",
+        "xmlattribute",
+        "xmldtd",
+        "file",
+        "xmlnamespace"
+      ]
+    }
+  ],
+  "enums": [
+    {
+      "table": "macroinvocation",
+      "filed": "kind",
+      "items": [
+        { "id": "1", "table": "macro_expansion" },
+        { "id": "2", "table": "other_macro_reference" }
+      ]
+    },
+    {
+      "table": "function",
+      "filed": "kind",
+      "items": [
+        { "id": "0", "table": "unknown_function" },
+        { "id": "1", "table": "normal_function" },
+        { "id": "2", "table": "constructor" },
+        { "id": "3", "table": "destructor" },
+        { "id": "4", "table": "conversion_function" },
+        { "id": "5", "table": "operator" },
+        { "id": "7", "table": "user_defined_literal" },
+        { "id": "8", "table": "deduction_guide" }
+      ]
+    },
+    {
+      "table": "using",
+      "filed": "kind",
+      "items": [
+        { "id": "1", "table": "using_declaration" },
+        { "id": "2", "table": "using_directive" },
+        { "id": "3", "table": "using_enum_declaration" }
+      ]
+    },
+    {
+      "table": "builtintype",
+      "filed": "kind",
+      "items": [
+        { "id": "1", "table": "errortype" },
+        { "id": "2", "table": "unknowntype" },
+        { "id": "3", "table": "void" },
+        { "id": "4", "table": "boolean" },
+        { "id": "5", "table": "char" },
+        { "id": "6", "table": "unsigned_char" },
+        { "id": "7", "table": "signed_char" },
+        { "id": "8", "table": "short" },
+        { "id": "9", "table": "unsigned_short" },
+        { "id": "10", "table": "signed_short" },
+        { "id": "11", "table": "int" },
+        { "id": "12", "table": "unsigned_int" },
+        { "id": "13", "table": "signed_int" },
+        { "id": "14", "table": "long" },
+        { "id": "15", "table": "unsigned_long" },
+        { "id": "16", "table": "signed_long" },
+        { "id": "17", "table": "long_long" },
+        { "id": "18", "table": "unsigned_long_long" },
+        { "id": "19", "table": "signed_long_long" },
+        { "id": "24", "table": "float" },
+        { "id": "25", "table": "double" },
+        { "id": "26", "table": "long_double" },
+        { "id": "27", "table": "complex_float" },
+        { "id": "28", "table": "complex_double" },
+        { "id": "29", "table": "complex_long_double" },
+        { "id": "30", "table": "imaginary_float" },
+        { "id": "31", "table": "imaginary_double" },
+        { "id": "32", "table": "imaginary_long_double" },
+        { "id": "33", "table": "wchar_t" },
+        { "id": "34", "table": "decltype_nullptr" },
+        { "id": "35", "table": "int128" },
+        { "id": "36", "table": "unsigned_int128" },
+        { "id": "37", "table": "signed_int128" },
+        { "id": "38", "table": "float128" },
+        { "id": "39", "table": "complex_float128" },
+        { "id": "40", "table": "decimal32" },
+        { "id": "41", "table": "decimal64" },
+        { "id": "42", "table": "decimal128" },
+        { "id": "43", "table": "char16_t" },
+        { "id": "44", "table": "char32_t" },
+        { "id": "45", "table": "std_float32" },
+        { "id": "46", "table": "float32x" },
+        { "id": "47", "table": "std_float64" },
+        { "id": "48", "table": "float64x" },
+        { "id": "49", "table": "std_float128" },
+        { "id": "51", "table": "char8_t" },
+        { "id": "52", "table": "float16" },
+        { "id": "53", "table": "complex_float16" },
+        { "id": "54", "table": "fp16" },
+        { "id": "55", "table": "std_bfloat16" },
+        { "id": "56", "table": "std_float16" },
+        { "id": "57", "table": "complex_std_float32" },
+        { "id": "58", "table": "complex_float32x" },
+        { "id": "59", "table": "complex_std_float64" },
+        { "id": "60", "table": "complex_float64x" },
+        { "id": "61", "table": "complex_std_float128" },
+        { "id": "62", "table": "mfp8" },
+        { "id": "63", "table": "scalable_vector_count" },
+        { "id": "64", "table": "complex_fp16" },
+        { "id": "65", "table": "complex_std_bfloat16" },
+        { "id": "66", "table": "complex_std_float16" }
+      ]
+    },
+    {
+      "table": "derivedtype",
+      "filed": "kind",
+      "items": [
+        { "id": "1", "table": "pointer" },
+        { "id": "2", "table": "reference" },
+        { "id": "3", "table": "type_with_specifiers" },
+        { "id": "4", "table": "array" },
+        { "id": "5", "table": "gnu_vector" },
+        { "id": "6", "table": "routineptr" },
+        { "id": "7", "table": "routinereference" },
+        { "id": "8", "table": "rvalue_reference" },
+        { "id": "10", "table": "block" },
+        { "id": "11", "table": "scalable_vector" }
+      ]
+    },
+    {
+      "table": "type_operator",
+      "filed": "kind",
+      "items": [
+        { "id": "0", "table": "typeof" },
+        { "id": "1", "table": "underlying_type" },
+        { "id": "2", "table": "bases" },
+        { "id": "3", "table": "direct_bases" },
+        { "id": "4", "table": "add_lvalue_reference" },
+        { "id": "5", "table": "add_pointer" },
+        { "id": "6", "table": "add_rvalue_reference" },
+        { "id": "7", "table": "decay" },
+        { "id": "8", "table": "make_signed" },
+        { "id": "9", "table": "make_unsigned" },
+        { "id": "10", "table": "remove_all_extents" },
+        { "id": "11", "table": "remove_const" },
+        { "id": "12", "table": "remove_cv" },
+        { "id": "13", "table": "remove_cvref" },
+        { "id": "14", "table": "remove_extent" },
+        { "id": "15", "table": "remove_pointer" },
+        { "id": "16", "table": "remove_reference_t" },
+        { "id": "17", "table": "remove_restrict" },
+        { "id": "18", "table": "remove_volatile" },
+        { "id": "19", "table": "remove_reference" }
+      ]
+    },
+    {
+      "table": "usertype",
+      "filed": "kind",
+      "items": [
+        { "id": "0", "table": "unknown_usertype" },
+        { "id": "1", "table": "struct" },
+        { "id": "2", "table": "class" },
+        { "id": "3", "table": "union" },
+        { "id": "4", "table": "enum" },
+        { "id": "7", "table": "template_parameter" },
+        { "id": "8", "table": "template_template_parameter" },
+        { "id": "9", "table": "proxy_class" },
+        { "id": "13", "table": "scoped_enum" },
+        { "id": "15", "table": "template_struct" },
+        { "id": "16", "table": "template_class" },
+        { "id": "17", "table": "template_union" },
+        { "id": "18", "table": "alias" }
+      ]
+    },
+    {
+      "table": "attribute",
+      "filed": "kind",
+      "items": [
+        { "id": "0", "table": "gnuattribute" },
+        { "id": "1", "table": "stdattribute" },
+        { "id": "2", "table": "declspec" },
+        { "id": "3", "table": "msattribute" },
+        { "id": "4", "table": "alignas" }
+      ]
+    },
+    {
+      "table": "attribute_arg",
+      "filed": "kind",
+      "items": [
+        { "id": "0", "table": "attribute_arg_empty" },
+        { "id": "1", "table": "attribute_arg_token" },
+        { "id": "2", "table": "attribute_arg_constant" },
+        { "id": "3", "table": "attribute_arg_type" },
+        { "id": "4", "table": "attribute_arg_constant_expr" },
+        { "id": "5", "table": "attribute_arg_expr" }
+      ]
+    },
+    {
+      "table": "expr",
+      "filed": "kind",
+      "items": [
+        { "id": "1", "table": "errorexpr" },
+        { "id": "2", "table": "address_of" },
+        { "id": "3", "table": "reference_to" },
+        { "id": "4", "table": "indirect" },
+        { "id": "5", "table": "ref_indirect" },
+        { "id": "8", "table": "array_to_pointer" },
+        { "id": "9", "table": "vacuous_destructor_call" },
+        { "id": "11", "table": "assume" },
+        { "id": "12", "table": "parexpr" },
+        { "id": "13", "table": "arithnegexpr" },
+        { "id": "14", "table": "unaryplusexpr" },
+        { "id": "15", "table": "complementexpr" },
+        { "id": "16", "table": "notexpr" },
+        { "id": "17", "table": "conjugation" },
+        { "id": "18", "table": "realpartexpr" },
+        { "id": "19", "table": "imagpartexpr" },
+        { "id": "20", "table": "postincrexpr" },
+        { "id": "21", "table": "postdecrexpr" },
+        { "id": "22", "table": "preincrexpr" },
+        { "id": "23", "table": "predecrexpr" },
+        { "id": "24", "table": "conditionalexpr" },
+        { "id": "25", "table": "addexpr" },
+        { "id": "26", "table": "subexpr" },
+        { "id": "27", "table": "mulexpr" },
+        { "id": "28", "table": "divexpr" },
+        { "id": "29", "table": "remexpr" },
+        { "id": "30", "table": "jmulexpr" },
+        { "id": "31", "table": "jdivexpr" },
+        { "id": "32", "table": "fjaddexpr" },
+        { "id": "33", "table": "jfaddexpr" },
+        { "id": "34", "table": "fjsubexpr" },
+        { "id": "35", "table": "jfsubexpr" },
+        { "id": "36", "table": "paddexpr" },
+        { "id": "37", "table": "psubexpr" },
+        { "id": "38", "table": "pdiffexpr" },
+        { "id": "39", "table": "lshiftexpr" },
+        { "id": "40", "table": "rshiftexpr" },
+        { "id": "41", "table": "andexpr" },
+        { "id": "42", "table": "orexpr" },
+        { "id": "43", "table": "xorexpr" },
+        { "id": "44", "table": "eqexpr" },
+        { "id": "45", "table": "neexpr" },
+        { "id": "46", "table": "gtexpr" },
+        { "id": "47", "table": "ltexpr" },
+        { "id": "48", "table": "geexpr" },
+        { "id": "49", "table": "leexpr" },
+        { "id": "50", "table": "minexpr" },
+        { "id": "51", "table": "maxexpr" },
+        { "id": "52", "table": "assignexpr" },
+        { "id": "53", "table": "assignaddexpr" },
+        { "id": "54", "table": "assignsubexpr" },
+        { "id": "55", "table": "assignmulexpr" },
+        { "id": "56", "table": "assigndivexpr" },
+        { "id": "57", "table": "assignremexpr" },
+        { "id": "58", "table": "assignlshiftexpr" },
+        { "id": "59", "table": "assignrshiftexpr" },
+        { "id": "60", "table": "assignandexpr" },
+        { "id": "61", "table": "assignorexpr" },
+        { "id": "62", "table": "assignxorexpr" },
+        { "id": "63", "table": "assignpaddexpr" },
+        { "id": "64", "table": "assignpsubexpr" },
+        { "id": "65", "table": "andlogicalexpr" },
+        { "id": "66", "table": "orlogicalexpr" },
+        { "id": "67", "table": "commaexpr" },
+        { "id": "68", "table": "subscriptexpr" },
+        { "id": "73", "table": "virtfunptrexpr" },
+        { "id": "74", "table": "callexpr" },
+        { "id": "79", "table": "vastartexpr" },
+        { "id": "80", "table": "vaargexpr" },
+        { "id": "81", "table": "vaendexpr" },
+        { "id": "82", "table": "vacopyexpr" },
+        { "id": "84", "table": "varaccess" },
+        { "id": "85", "table": "thisaccess" },
+        { "id": "87", "table": "new_expr" },
+        { "id": "88", "table": "delete_expr" },
+        { "id": "89", "table": "throw_expr" },
+        { "id": "90", "table": "condition_decl" },
+        { "id": "91", "table": "braced_init_list" },
+        { "id": "92", "table": "type_id" },
+        { "id": "93", "table": "runtime_sizeof" },
+        { "id": "94", "table": "runtime_alignof" },
+        { "id": "95", "table": "sizeof_pack" },
+        { "id": "96", "table": "expr_stmt" },
+        { "id": "97", "table": "routineexpr" },
+        { "id": "98", "table": "type_operand" },
+        { "id": "99", "table": "offsetofexpr" },
+        { "id": "100", "table": "hasassignexpr" },
+        { "id": "101", "table": "hascopyexpr" },
+        { "id": "102", "table": "hasnothrowassign" },
+        { "id": "103", "table": "hasnothrowconstr" },
+        { "id": "104", "table": "hasnothrowcopy" },
+        { "id": "105", "table": "hastrivialassign" },
+        { "id": "106", "table": "hastrivialconstr" },
+        { "id": "107", "table": "hastrivialcopy" },
+        { "id": "108", "table": "hasuserdestr" },
+        { "id": "109", "table": "hasvirtualdestr" },
+        { "id": "110", "table": "isabstractexpr" },
+        { "id": "111", "table": "isbaseofexpr" },
+        { "id": "112", "table": "isclassexpr" },
+        { "id": "113", "table": "isconvtoexpr" },
+        { "id": "114", "table": "isemptyexpr" },
+        { "id": "115", "table": "isenumexpr" },
+        { "id": "116", "table": "ispodexpr" },
+        { "id": "117", "table": "ispolyexpr" },
+        { "id": "118", "table": "isunionexpr" },
+        { "id": "119", "table": "typescompexpr" },
+        { "id": "120", "table": "intaddrexpr" },
+        { "id": "122", "table": "hastrivialdestructor" },
+        { "id": "123", "table": "literal" },
+        { "id": "124", "table": "uuidof" },
+        { "id": "127", "table": "aggregateliteral" },
+        { "id": "128", "table": "delete_array_expr" },
+        { "id": "129", "table": "new_array_expr" },
+        { "id": "132", "table": "foldexpr" },
+        { "id": "200", "table": "ctordirectinit" },
+        { "id": "201", "table": "ctorvirtualinit" },
+        { "id": "202", "table": "ctorfieldinit" },
+        { "id": "203", "table": "ctordelegatinginit" },
+        { "id": "204", "table": "dtordirectdestruct" },
+        { "id": "205", "table": "dtorvirtualdestruct" },
+        { "id": "206", "table": "dtorfielddestruct" },
+        { "id": "210", "table": "static_cast" },
+        { "id": "211", "table": "reinterpret_cast" },
+        { "id": "212", "table": "const_cast" },
+        { "id": "213", "table": "dynamic_cast" },
+        { "id": "214", "table": "c_style_cast" },
+        { "id": "215", "table": "lambdaexpr" },
+        { "id": "216", "table": "param_ref" },
+        { "id": "217", "table": "noopexpr" },
+        { "id": "294", "table": "istriviallyconstructibleexpr" },
+        { "id": "295", "table": "isdestructibleexpr" },
+        { "id": "296", "table": "isnothrowdestructibleexpr" },
+        { "id": "297", "table": "istriviallydestructibleexpr" },
+        { "id": "298", "table": "istriviallyassignableexpr" },
+        { "id": "299", "table": "isnothrowassignableexpr" },
+        { "id": "300", "table": "istrivialexpr" },
+        { "id": "301", "table": "isstandardlayoutexpr" },
+        { "id": "302", "table": "istriviallycopyableexpr" },
+        { "id": "303", "table": "isliteraltypeexpr" },
+        { "id": "304", "table": "hastrivialmoveconstructorexpr" },
+        { "id": "305", "table": "hastrivialmoveassignexpr" },
+        { "id": "306", "table": "hasnothrowmoveassignexpr" },
+        { "id": "307", "table": "isconstructibleexpr" },
+        { "id": "308", "table": "isnothrowconstructibleexpr" },
+        { "id": "309", "table": "hasfinalizerexpr" },
+        { "id": "310", "table": "isdelegateexpr" },
+        { "id": "311", "table": "isinterfaceclassexpr" },
+        { "id": "312", "table": "isrefarrayexpr" },
+        { "id": "313", "table": "isrefclassexpr" },
+        { "id": "314", "table": "issealedexpr" },
+        { "id": "315", "table": "issimplevalueclassexpr" },
+        { "id": "316", "table": "isvalueclassexpr" },
+        { "id": "317", "table": "isfinalexpr" },
+        { "id": "319", "table": "noexceptexpr" },
+        { "id": "320", "table": "builtinshufflevector" },
+        { "id": "321", "table": "builtinchooseexpr" },
+        { "id": "322", "table": "builtinaddressof" },
+        { "id": "323", "table": "vec_fill" },
+        { "id": "324", "table": "builtinconvertvector" },
+        { "id": "325", "table": "builtincomplex" },
+        { "id": "326", "table": "spaceshipexpr" },
+        { "id": "327", "table": "co_await" },
+        { "id": "328", "table": "co_yield" },
+        { "id": "329", "table": "temp_init" },
+        { "id": "330", "table": "isassignable" },
+        { "id": "331", "table": "isaggregate" },
+        { "id": "332", "table": "hasuniqueobjectrepresentations" },
+        { "id": "333", "table": "builtinbitcast" },
+        { "id": "334", "table": "builtinshuffle" },
+        { "id": "335", "table": "blockassignexpr" },
+        { "id": "336", "table": "issame" },
+        { "id": "337", "table": "isfunction" },
+        { "id": "338", "table": "islayoutcompatible" },
+        { "id": "339", "table": "ispointerinterconvertiblebaseof" },
+        { "id": "340", "table": "isarray" },
+        { "id": "341", "table": "arrayrank" },
+        { "id": "342", "table": "arrayextent" },
+        { "id": "343", "table": "isarithmetic" },
+        { "id": "344", "table": "iscompletetype" },
+        { "id": "345", "table": "iscompound" },
+        { "id": "346", "table": "isconst" },
+        { "id": "347", "table": "isfloatingpoint" },
+        { "id": "348", "table": "isfundamental" },
+        { "id": "349", "table": "isintegral" },
+        { "id": "350", "table": "islvaluereference" },
+        { "id": "351", "table": "ismemberfunctionpointer" },
+        { "id": "352", "table": "ismemberobjectpointer" },
+        { "id": "353", "table": "ismemberpointer" },
+        { "id": "354", "table": "isobject" },
+        { "id": "355", "table": "ispointer" },
+        { "id": "356", "table": "isreference" },
+        { "id": "357", "table": "isrvaluereference" },
+        { "id": "358", "table": "isscalar" },
+        { "id": "359", "table": "issigned" },
+        { "id": "360", "table": "isunsigned" },
+        { "id": "361", "table": "isvoid" },
+        { "id": "362", "table": "isvolatile" },
+        { "id": "363", "table": "reuseexpr" },
+        { "id": "364", "table": "istriviallycopyassignable" },
+        { "id": "365", "table": "isassignablenopreconditioncheck" },
+        { "id": "366", "table": "referencebindstotemporary" },
+        { "id": "367", "table": "issameas" },
+        { "id": "368", "table": "builtinhasattribute" },
+        { "id": "369", "table": "ispointerinterconvertiblewithclass" },
+        { "id": "370", "table": "builtinispointerinterconvertiblewithclass" },
+        { "id": "371", "table": "iscorrespondingmember" },
+        { "id": "372", "table": "builtiniscorrespondingmember" },
+        { "id": "373", "table": "isboundedarray" },
+        { "id": "374", "table": "isunboundedarray" },
+        { "id": "375", "table": "isreferenceable" },
+        { "id": "378", "table": "isnothrowconvertible" },
+        { "id": "379", "table": "referenceconstructsfromtemporary" },
+        { "id": "380", "table": "referenceconvertsfromtemporary" },
+        { "id": "381", "table": "isconvertible" },
+        { "id": "382", "table": "isvalidwinrttype" },
+        { "id": "383", "table": "iswinclass" },
+        { "id": "384", "table": "iswininterface" },
+        { "id": "385", "table": "istriviallyequalitycomparable" },
+        { "id": "386", "table": "isscopedenum" },
+        { "id": "387", "table": "istriviallyrelocatable" },
+        { "id": "388", "table": "datasizeof" },
+        { "id": "389", "table": "c11_generic" },
+        { "id": "390", "table": "requires_expr" },
+        { "id": "391", "table": "nested_requirement" },
+        { "id": "392", "table": "compound_requirement" },
+        { "id": "393", "table": "concept_id" }
+      ]
+    },
+    {
+      "table": "stmt",
+      "filed": "kind",
+      "items": [
+        { "id": "1", "table": "stmt_expr" },
+        { "id": "2", "table": "stmt_if" },
+        { "id": "3", "table": "stmt_while" },
+        { "id": "4", "table": "stmt_goto" },
+        { "id": "5", "table": "stmt_label" },
+        { "id": "6", "table": "stmt_return" },
+        { "id": "7", "table": "stmt_block" },
+        { "id": "8", "table": "stmt_end_test_while" },
+        { "id": "9", "table": "stmt_for" },
+        { "id": "10", "table": "stmt_switch_case" },
+        { "id": "11", "table": "stmt_switch" },
+        { "id": "13", "table": "stmt_asm" },
+        { "id": "15", "table": "stmt_try_block" },
+        { "id": "16", "table": "stmt_microsoft_try" },
+        { "id": "17", "table": "stmt_decl" },
+        { "id": "18", "table": "stmt_set_vla_size" },
+        { "id": "19", "table": "stmt_vla_decl" },
+        { "id": "25", "table": "stmt_assigned_goto" },
+        { "id": "26", "table": "stmt_empty" },
+        { "id": "27", "table": "stmt_continue" },
+        { "id": "28", "table": "stmt_break" },
+        { "id": "29", "table": "stmt_range_based_for" },
+        { "id": "33", "table": "stmt_handler" },
+        { "id": "35", "table": "stmt_constexpr_if" },
+        { "id": "37", "table": "stmt_co_return" },
+        { "id": "38", "table": "stmt_consteval_if" },
+        { "id": "39", "table": "stmt_not_consteval_if" },
+        { "id": "40", "table": "stmt_leave" }
+      ]
+    },
+    {
+      "table": "preprocdirect",
+      "filed": "kind",
+      "items": [
+        { "id": "0", "table": "ppd_if" },
+        { "id": "1", "table": "ppd_ifdef" },
+        { "id": "2", "table": "ppd_ifndef" },
+        { "id": "3", "table": "ppd_elif" },
+        { "id": "4", "table": "ppd_else" },
+        { "id": "5", "table": "ppd_endif" },
+        { "id": "6", "table": "ppd_plain_include" },
+        { "id": "7", "table": "ppd_define" },
+        { "id": "8", "table": "ppd_undef" },
+        { "id": "9", "table": "ppd_line" },
+        { "id": "10", "table": "ppd_error" },
+        { "id": "11", "table": "ppd_pragma" },
+        { "id": "12", "table": "ppd_objc_import" },
+        { "id": "13", "table": "ppd_include_next" },
+        { "id": "14", "table": "ppd_ms_import" },
+        { "id": "15", "table": "ppd_elifdef" },
+        { "id": "16", "table": "ppd_elifndef" },
+        { "id": "18", "table": "ppd_warning" }
+      ]
+    }
+  ]
+}
+

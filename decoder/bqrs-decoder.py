@@ -77,10 +77,6 @@ def decode_all_to_csv(bqrs_file: Path, output_dir: Path):
         logger.info(f"Saved: {output_csv}")
 
 
-
-
-
-
 def main():
     parser = argparse.ArgumentParser(description="Decode BQRS files to CSV")
     parser.add_argument("--bqrs", type=Path, required=True, help="Path to BQRS file")

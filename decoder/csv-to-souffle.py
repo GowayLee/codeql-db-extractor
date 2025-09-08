@@ -123,32 +123,32 @@ def csv_to_souffle(csv_dir: Path, output_file: Path, prefix: Optional[str] = Non
                     param_decls.append(f"{col_name}: {col_type}")
 
                 f_out.write(f".decl {relation_name}({', '.join(param_decls)})\n")
-                f_out.write(f".input {relation_name}\n")
+                # f_out.write(f".input {relation_name}\n")
 
-                # 重置文件指针并写入事实数据
-                f_in.seek(0)
-                next(reader)  # 跳过头部
+                # # 重置文件指针并写入事实数据
+                # f_in.seek(0)
+                # next(reader)  # 跳过头部
+                #
+                # row_count = 0
+                # for row in reader:
+                #     if len(row) == len(columns):
+                #         # 转义特殊字符并格式化输出
+                #         formatted_row = []
+                #         for i, value in enumerate(row):
+                #             if value and value.strip():
+                #                 if column_types[i] == "symbol":
+                #                     # 转义引号和反斜杠
+                #                     escaped_value = value.replace("\\", "\\\\").replace('"', '\\"')
+                #                     formatted_row.append(f'"{escaped_value}"')
+                #                 else:
+                #                     formatted_row.append(value)
+                #             else:
+                #                 formatted_row.append('""' if column_types[i] == "symbol" else "0")
+                #
+                #         f_out.write(f"{relation_name}({', '.join(formatted_row)}).\n")
+                #         row_count += 1
 
-                row_count = 0
-                for row in reader:
-                    if len(row) == len(columns):
-                        # 转义特殊字符并格式化输出
-                        formatted_row = []
-                        for i, value in enumerate(row):
-                            if value and value.strip():
-                                if column_types[i] == "symbol":
-                                    # 转义引号和反斜杠
-                                    escaped_value = value.replace("\\", "\\\\").replace('"', '\\"')
-                                    formatted_row.append(f'"{escaped_value}"')
-                                else:
-                                    formatted_row.append(value)
-                            else:
-                                formatted_row.append('""' if column_types[i] == "symbol" else "0")
-
-                        f_out.write(f"{relation_name}({', '.join(formatted_row)}).\n")
-                        row_count += 1
-
-                logger.info(f"Added relation {relation_name} with {row_count} facts")
+                # logger.info(f"Added relation {relation_name} with {row_count} facts")
                 f_out.write("\n\n")
 
 
